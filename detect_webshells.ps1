@@ -92,5 +92,5 @@ if ($affected) {
     echo "Server requires further examination to confirm the breach and determine it's extent"
     echo "Consider sending malware (webshells and other) samples to cert@cert.lv for further analysis"
 } else {
-    echo "No webshells found, but they might have been removed or attackers might have used other persistence techniques'"
+    echo "No webshells found, but they might have been removed or attackers might have used other persistence techniques"
 }
