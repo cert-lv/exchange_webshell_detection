@@ -27,7 +27,9 @@ try {
 $files = Get-ChildItem $inetpubs -Recurse -File
 if ($files) {
     echo "Found suspicious files (not used by Exchange, typical webshell location):"
-    $files | Select-Object FullName, LastWriteTime
+    echo ""
+    Get-ChildItem $files.FullName | Select-Object FullName, LastWriteTime
+    echo ""
     $affected = $TRUE
 }
 
@@ -84,7 +86,9 @@ $directory = "$($env:exchangeinstallpath)/Frontend"
 $matches = dir -Recurse $directory | Select-String -Pattern $keywords
 if ($matches) {
     echo "Found suspicious files in Exchange frontend dir and they match functions used by known webshells:"
+    echo ""
     Get-ChildItem $matches.Path | Select-Object FullName, LastWriteTime
+    echo ""
     $affected = $TRUE
 }
 
