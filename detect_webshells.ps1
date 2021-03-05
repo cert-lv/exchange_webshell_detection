@@ -24,7 +24,8 @@ try {
     # e.g. Default Web Site might have been removed from IIS
 }
 
-$files = Get-ChildItem $inetpubs -Recurse -File
+# some IIS have useless web.config files in inetpub for legacy reasons
+$files = Get-ChildItem $inetpubs -Recurse -File | Where-Object { $_.Name -ne "web.config" }
 if ($files) {
     echo "Found suspicious files (not used by Exchange, typical webshell location):"
     echo ""
@@ -32,6 +33,43 @@ if ($files) {
     echo ""
     $affected = $TRUE
 }
+
+# web.config can hold backdoor itself though, so filter out legacy ones
+
+# hashes of false positive web.config files
+$false_positives = $(
+# <?xml version="1.0" encoding="UTF-8"?>
+# <configuration>
+# <system.webServer>
+# <httpRedirect enabled="false" />
+# </system.webServer>
+# </configuration>
+    "5470EAFEB40805AC58B13DE3EB64BEA6200C5446E37A21E7674913F2ADF5C089",
+#
+# <?xml version="1.0" encoding="UTF-8"?>
+# <configuration>
+# <system.webServer>
+# <httpRedirect enabled="true" />
+# </system.webServer>
+# </configuration>
+    "843A6D81A3BE784755EF1340F224465CD9AA51E7A71D4153048307F8E1AA7C15"
+)
+
+# go through web.config's, filter out the ones with hashes different from the ones listed above
+$hashes = Get-ChildItem $inetpub -Recurse -File |
+  Where-Object { $_.Name -eq "web.config" } |
+  ForEach-Object { Get-FileHash -Algorithm sha256 $_.FullName } |
+  Where-Object { $_.Hash -notin $false_positives }
+
+if ($hashes) {
+    echo "Found suspicious web.config files (could be harmless, but sometimes used as backdoors):"
+    echo "Examples of harmful behaviour: https://soroush.secproject.com/blog/2019/08/uploading-web-config-for-fun-and-profit-2/"
+    echo ""
+    Get-ChildItem $hashes.Path | Select-Object FullName, LastWriteTime
+    echo ""
+    $affected = $TRUE
+}
+
 
 ##
 ## 2. iterate over files in frontend and look for webshell IoC's
