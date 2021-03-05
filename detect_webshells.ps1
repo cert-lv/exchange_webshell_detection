@@ -52,7 +52,21 @@ $false_positives = $(
 # <httpRedirect enabled="true" />
 # </system.webServer>
 # </configuration>
-    "843A6D81A3BE784755EF1340F224465CD9AA51E7A71D4153048307F8E1AA7C15"
+    "843A6D81A3BE784755EF1340F224465CD9AA51E7A71D4153048307F8E1AA7C15",
+#
+# <configuration>
+# <system.webServer>
+# <httpRedirect enabled="false" destination="" childOnly="false" />
+# </system.webServer>
+# </configuration>
+    "6625962A82913289FEFDC17E12BB44360898C12D0DBD3E47B0A9345ED99C887D",
+#
+# <configuration>
+# <system.webServer>
+# <httpRedirect enabled="true" destination="" childOnly="false" />
+# </system.webServer>
+# </configuration>
+    "0B996ADC7D510FCCEB253DC8B56AAA487840DD84EECD022F8F3A36EB0A6FD9F6"
 )
 
 # go through web.config's, filter out the ones with hashes different from the ones listed above
