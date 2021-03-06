@@ -24,10 +24,11 @@ Writeups/disclosures (incl. IoC):
   - https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/
   - https://blog.rapid7.com/2021/03/03/rapid7s-insightidr-enables-detection-and-response-to-microsoft-exchange-0-day/
   - https://us-cert.cisa.gov/ncas/alerts/aa21-062a
+  - https://msrc-blog.microsoft.com/2021/03/05/microsoft-exchange-server-vulnerabilities-mitigations-march-2021/
 
 Notable detection scripts:
 
-  - https://github.com/microsoft/CSS-Exchange/tree/main/Security
+  - https://github.com/microsoft/CSS-Exchange/tree/main/Security (incl. nmap script for remote SSRF detection!)
   - https://github.com/soteria-security/HAFNIUM-IOC
   - https://github.com/sgnls/exchange-0days-202103
   - https://github.com/mr-r3b00t/ExchangeMarch2021IOCHunt
