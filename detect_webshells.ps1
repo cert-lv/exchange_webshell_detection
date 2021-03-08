@@ -76,8 +76,10 @@ $hashes = Get-ChildItem $inetpub -Recurse -File |
   Where-Object { $_.Hash -notin $false_positives }
 
 if ($hashes) {
-    echo "Found suspicious web.config files (could be harmless, but sometimes used as backdoors):"
-    echo "Examples of harmful behaviour: https://soroush.secproject.com/blog/2019/08/uploading-web-config-for-fun-and-profit-2/"
+    echo "Found following web.config files. These files are often created automatically by IIS to reflect local configuration / environment."
+    echo "So far there have been no reports of any web.config files being used in attacks related to proxylogin vulnerabilities."
+    echo "Nevertheless we suggest expecting these web.config files manually as they can be used to host backdoors:"
+    echo "    https://soroush.secproject.com/blog/2019/08/uploading-web-config-for-fun-and-profit-2/"
     echo ""
     Get-ChildItem $hashes.Path | Select-Object FullName, LastWriteTime
     echo ""
