@@ -25,6 +25,7 @@ Writeups/disclosures (incl. IoC):
   - https://blog.rapid7.com/2021/03/03/rapid7s-insightidr-enables-detection-and-response-to-microsoft-exchange-0-day/
   - https://us-cert.cisa.gov/ncas/alerts/aa21-062a
   - https://msrc-blog.microsoft.com/2021/03/05/microsoft-exchange-server-vulnerabilities-mitigations-march-2021/
+  - https://blog.truesec.com/2021/03/07/exchange-zero-day-proxylogon-and-hafnium/
 
 Notable detection scripts:
 
