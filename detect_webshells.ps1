@@ -70,7 +70,7 @@ $false_positives = $(
 )
 
 # go through web.config's, filter out the ones with hashes different from the ones listed above
-$hashes = Get-ChildItem $inetpub -Recurse -File |
+$hashes = Get-ChildItem $inetpubs -Recurse -File |
   Where-Object { $_.Name -eq "web.config" } |
   ForEach-Object { Get-FileHash -Algorithm sha256 $_.FullName } |
   Where-Object { $_.Hash -notin $false_positives }
