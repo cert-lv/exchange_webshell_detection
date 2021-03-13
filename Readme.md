@@ -1,3 +1,11 @@
+# UPD: As of March 13, 2021 Windows Defender is detecting this script itself as a Webshell
+
+This is a false positive, A/V products react to keywords listed in the script. `detect_webshells.ps1` is intentionally written as a standalone file using very simple PowerShell, so that you could inspect it yourself. The keywords that (rightly) trigger A/V are listed on [line 94](https://github.com/cert-lv/exchange_webshell_detection/blob/c6fea9dae261cc4879931ad9c50546fcc0c0df66/detect_webshells.ps1#L94). If you do not feel confident that you understand what the script is doing, do not run it!
+
+Hopefully the fact that antivirus software started detecting this script means it's capable of detecting real webshells as well, making `detect_webshells.ps1` unnecessary. Check that Exchange and inetpub directories are not whitelisted though and please realise that webshells where only used for the initial access. Once attackers achieved code execution they usually deployed additional persistence mechanisms - sometimes even removing initial webshell themselves to hide their tracks.
+
+So **don't mistake lack of webshells for lack of compromise** - unfortunately your server still might have been hacked and either attackers removed webshell themselves or an antivirus did that (without completely booting attackers from your server).
+
 # Detect webshells dropped on Microsoft Exchange servers after 0day compromises
 This script looks for webshells dropped on Microsoft Exchange servers while they were vulnerable to following CVE's:
 
