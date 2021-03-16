@@ -29,7 +29,7 @@ $files = Get-ChildItem $inetpubs -Recurse -File | Where-Object { $_.Name -ne "we
 if ($files) {
     echo "Found suspicious files (not used by Exchange, typical webshell location):"
     echo ""
-    Get-ChildItem $files.FullName | Select-Object FullName, LastWriteTime
+    Get-ChildItem $files.FullName | Select-Object FullName, LastWriteTime | Format-Table -Wrap -Autosize
     echo ""
     $affected = $TRUE
 }
@@ -81,7 +81,7 @@ if ($hashes) {
     echo "Nevertheless we suggest expecting these web.config files manually as they can be used to host backdoors:"
     echo "    https://soroush.secproject.com/blog/2019/08/uploading-web-config-for-fun-and-profit-2/"
     echo ""
-    Get-ChildItem $hashes.Path | Select-Object FullName, LastWriteTime
+    Get-ChildItem $hashes.Path | Select-Object FullName, LastWriteTime | Format-Table -Wrap -Autosize
     echo ""
     $affected = $TRUE
 }
@@ -141,7 +141,7 @@ $matches = dir -Recurse $directory | Select-String -Pattern $keywords
 if ($matches) {
     echo "Found suspicious files in Exchange frontend dir and they match functions used by known webshells:"
     echo ""
-    Get-ChildItem $matches.Path | Select-Object FullName, LastWriteTime
+    Get-ChildItem $matches.Path | Select-Object FullName, LastWriteTime | Format-Table -Wrap -Autosize
     echo ""
     $affected = $TRUE
 }
