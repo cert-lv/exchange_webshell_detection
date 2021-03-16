@@ -1,3 +1,14 @@
+### This project has been discontinued
+
+Please use Microsoft tools instead:
+
+  - [Microsoft Safety Scanner](https://docs.microsoft.com/en-us/windows/security/threat-protection/intelligence/safety-scanner-download)
+  - Other detections and mitigations listed in: https://github.com/microsoft/CSS-Exchange/tree/main/Security
+  
+When assessing impact we strongly suggest to assume breach and to preemptively examine all MS Exchange servers that were publically exposed since January, even if there are no signs of active compromise.
+
+Note that data exfiltration and configuration changes were possible (and were happening) just through SSRF part of the epxloit chain alone (i.e. without achieving code execution, dropping any files or spawning new processes on the Exchange host).
+
 ### UPD: As of March 13, 2021 Windows Defender is detecting this script itself as a Webshell
 
 This is a false positive, A/V products react to keywords listed in the script. `detect_webshells.ps1` is intentionally written as a standalone file using very simple PowerShell, so that you could inspect it yourself. The keywords that (rightly) trigger A/V are listed on [line 94](https://github.com/cert-lv/exchange_webshell_detection/blob/c6fea9dae261cc4879931ad9c50546fcc0c0df66/detect_webshells.ps1#L94). If you do not feel confident that you understand what the script is doing, do not run it!
